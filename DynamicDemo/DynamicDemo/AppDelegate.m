@@ -19,14 +19,21 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     JSContext *content = [[JSContext alloc] init];
-    content[@"call"] = ^(NSString *msg) {
+    content[@"hello"] = ^(NSString *msg) {
         NSLog(@"hello %@",msg);
     };
-//    content[@""]
-//    [content evaluateScript:@"hello('world')"];
-    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"dynamic_demo" ofType:@"js"];
-    NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
-    [content evaluateScript:@"UIView.__c('alloc')().__c('init')()"];
+    [content evaluateScript:@"hello('world')"];
+//    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"dynamic_demo" ofType:@"js"];
+//    NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
+//    [content evaluateScript:@"UIView.__c('alloc')().__c('init')()"];
+    content[@"_OC_callC"] = ^(NSString *className, NSString *selectorName,JSValue *arguments) {
+        id obj = [arguments toObject];
+        if([obj isKindOfClass:[NSArray class]]) {
+            NSLog(@"");
+        }
+        NSLog(@"hello");
+    };
+    [content evaluateScript:@"_OC_callC('UIView','new', ['Saab', 'Volvo', 'BMW'])"];
     return YES;
 }
 

@@ -16,6 +16,7 @@
 		8A1967332477B8C60010624C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8A1967322477B8C60010624C /* main.m */; };
 		8A19673B2477B9700010624C /* JavaScriptCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8A19673A2477B9700010624C /* JavaScriptCore.framework */; };
 		8A19673D2477BBF50010624C /* dynamic_demo.js in Resources */ = {isa = PBXBuildFile; fileRef = 8A19673C2477BBF50010624C /* dynamic_demo.js */; };
+		8AD269E8247FE1D300B1EC54 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 8AD269E7247FE1D300B1EC54 /* Person.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,8 @@
 		8A1967322477B8C60010624C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		8A19673A2477B9700010624C /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		8A19673C2477BBF50010624C /* dynamic_demo.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = dynamic_demo.js; sourceTree = "<group>"; };
+		8AD269E6247FE1D300B1EC54 /* Person.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		8AD269E7247FE1D300B1EC54 /* Person.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +82,8 @@
 				8A19672E2477B8C60010624C /* LaunchScreen.storyboard */,
 				8A1967312477B8C60010624C /* Info.plist */,
 				8A1967322477B8C60010624C /* main.m */,
+				8AD269E6247FE1D300B1EC54 /* Person.h */,
+				8AD269E7247FE1D300B1EC54 /* Person.m */,
 			);
 			path = DynamicDemo;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			files = (
 				8A1967282477B8C20010624C /* ViewController.m in Sources */,
 				8A1967222477B8C20010624C /* AppDelegate.m in Sources */,
+				8AD269E8247FE1D300B1EC54 /* Person.m in Sources */,
 				8A1967332477B8C60010624C /* main.m in Sources */,
 				8A1967252477B8C20010624C /* SceneDelegate.m in Sources */,
 			);

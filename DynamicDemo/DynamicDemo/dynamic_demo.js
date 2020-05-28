@@ -1,4 +1,5 @@
-function call(msg) {
-    console.log(msg)
-}
-call('success')
+var global = this
+
+//[Person walk]
+
+
