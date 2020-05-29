@@ -23,17 +23,17 @@
         NSLog(@"hello %@",msg);
     };
     [content evaluateScript:@"hello('world')"];
-//    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"dynamic_demo" ofType:@"js"];
-//    NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
+    NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"dynamic_demo" ofType:@"js"];
+    NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
 //    [content evaluateScript:@"UIView.__c('alloc')().__c('init')()"];
-    content[@"_OC_callC"] = ^(NSString *className, NSString *selectorName,JSValue *arguments) {
+    content[@"_OC_callC"] = ^(JSValue *arguments) {
         id obj = [arguments toObject];
-        if([obj isKindOfClass:[NSArray class]]) {
-            NSLog(@"");
-        }
+//        if([obj isKindOfClass:[NSArray class]]) {
+//            NSLog(@"");
+//        }
         NSLog(@"hello");
     };
-    [content evaluateScript:@"_OC_callC('UIView','new', ['Saab', 'Volvo', 'BMW'])"];
+    [content evaluateScript:jsCore];
     return YES;
 }
 
