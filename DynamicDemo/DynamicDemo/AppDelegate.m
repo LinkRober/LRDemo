@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import <JavaScriptCore/JavaScriptCore.h>
+#import <objc/runtime.h>
+
+static char *kPropAssociatedObjectKey;
 
 @interface AppDelegate ()
 
@@ -18,22 +21,34 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    JSContext *content = [[JSContext alloc] init];
-    content[@"hello"] = ^(NSString *msg) {
+    JSContext *context = [[JSContext alloc] init];
+    context[@"hello"] = ^(NSString *msg) {
         NSLog(@"hello %@",msg);
     };
-    [content evaluateScript:@"hello('world')"];
+    [context evaluateScript:@"hello('world')"];
     NSString *path = [[NSBundle bundleForClass:[self class]] pathForResource:@"dynamic_demo" ofType:@"js"];
     NSString *jsCore = [[NSString alloc] initWithData:[[NSFileManager defaultManager] contentsAtPath:path] encoding:NSUTF8StringEncoding];
 //    [content evaluateScript:@"UIView.__c('alloc')().__c('init')()"];
-    content[@"_OC_callC"] = ^(JSValue *arguments) {
+    context[@"_OC_callC"] = ^id(NSString *className, NSString *selectorName, JSValue *arguments) {
         id obj = [arguments toObject];
 //        if([obj isKindOfClass:[NSArray class]]) {
 //            NSLog(@"");
 //        }
-        NSLog(@"hello");
+        return @"hello";
     };
-    [content evaluateScript:jsCore];
+    context[@"_OC_getCustomProps"] = ^id(JSValue *obj) {
+//        id realObj = formatJSToOC(obj);
+        id realObj = [obj toObject];
+        return objc_getAssociatedObject(realObj, kPropAssociatedObjectKey);
+    };
+    
+    context[@"_OC_setCustomProps"] = ^(JSValue *obj, JSValue *val) {
+//        id realObj = formatJSToOC(obj);
+        id realObj = [obj toObject];
+        objc_setAssociatedObject(realObj, kPropAssociatedObjectKey, val, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+    };
+    
+    [context evaluateScript:jsCore];
     return YES;
 }
 
